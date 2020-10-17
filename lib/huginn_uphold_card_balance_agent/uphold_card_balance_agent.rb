@@ -12,6 +12,10 @@ module Agents
 
       `changes_only` is only used to emit event about a card's change.
 
+      `whithout_conversion_diff` prevents event's creation because of  value (USD/EUR) in real time in for card's value.
+
+      `debug` is used to verbose mode.
+
       `expected_receive_period_in_days` is used to determine if the Agent is working. Set it to the maximum number of days
       that you anticipate passing without this Agent receiving an incoming Event.
       MD
@@ -75,13 +79,17 @@ module Agents
       {
         'bearer_token' => '',
         'expected_receive_period_in_days' => '2',
-        'changes_only' => 'true'
+        'changes_only' => 'true',
+        'debug' => 'false',
+        'whithout_conversion_diff' => 'true'
       }
     end
 
     form_configurable :expected_receive_period_in_days, type: :string
     form_configurable :bearer_token, type: :string
     form_configurable :changes_only, type: :boolean
+    form_configurable :whithout_conversion_diff, type: :boolean
+    form_configurable :debug, type: :boolean
 
     def validate_options
       unless options['bearer_token'].present?
@@ -90,6 +98,14 @@ module Agents
 
       if options.has_key?('changes_only') && boolify(options['changes_only']).nil?
         errors.add(:base, "if provided, changes_only must be true or false")
+      end
+
+      if options.has_key?('whithout_conversion_diff') && boolify(options['whithout_conversion_diff']).nil?
+        errors.add(:base, "if provided, whithout_conversion_diff must be true or false")
+      end
+
+      if options.has_key?('debug') && boolify(options['debug']).nil?
+        errors.add(:base, "if provided, debug must be true or false")
       end
 
       unless options['expected_receive_period_in_days'].present? && options['expected_receive_period_in_days'].to_i > 0
@@ -145,11 +161,23 @@ module Agents
               found = false
               last_status.each do |cardbis|
                 if card == cardbis
-                    found = true
+                  found = true
+                  if interpolated['debug'] == 'true'
+                    log "found is #{found}"
+                  end
+                end
+                if interpolated['whithout_conversion_diff'] == 'true' and card['CreatedByApplicationId'] == cardbis['CreatedByApplicationId'] and card['balance'] == cardbis['balance']
+                  found = true
+                  if interpolated['debug'] == 'true'
+                    log "found is #{found} #{card['balance']} = #{cardbis['balance']} #{card['CreatedByApplicationId']} #{cardbis['CreatedByApplicationId']}"
+                  end
                 end
               end
+              if interpolated['debug'] == 'true'
+                log "found is #{found}"
+              end
               if found == false
-                  create_event payload: card
+                create_event payload: card
               end
             end
           end
