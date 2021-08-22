@@ -23,56 +23,57 @@ module Agents
 
     event_description <<-MD
       Events look like this:
-        {
-          "CreatedByApplicationId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-          "address": {
-            "wire": "xxxxxxxx"
-          },
-          "available": "0.00",
-          "balance": "0.00",
-          "currency": "XXX",
-          "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-          "label": "Xxxx Xxxxxxxx",
-          "lastTransactionAt": null,
-          "settings": {
-            "position": 1,
-            "protected": false,
-            "starred": true
-          },
-          "createdByApplicationClientId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-          "normalized": [
-            {
-              "available": "0.00",
-              "balance": "0.00",
-              "currency": "XXX"
-            }
-          ],
-          "wire": [
-            {
-              "accountName": "Xxxxxxxxxx",
-              "address": {
-                "line1": "Xxxxx Xxxxxx",
-                "line2": "XXXXXXXXXXXXXXXX"
-              },
-              "bic": "XXXXXXXX",
-              "currency": "XXX",
-              "iban": "XXXXXXXXXXXXXXXXXXXX",
-              "name": "xxxxxxxxxx"
+
+          {
+            "CreatedByApplicationId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "address": {
+              "wire": "xxxxxxxx"
             },
-            {
-              "accountName": "XXXXXXXXXXX",
-              "accountNumber": "xxxxxxxxxxxx",
-              "address": {
-                "line1": "xxxxxxxxxxxxxxxx",
-                "line2": "xxxxxxxxxxxxxxxx"
+            "available": "0.00",
+            "balance": "0.00",
+            "currency": "XXX",
+            "id": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "label": "Xxxx Xxxxxxxx",
+            "lastTransactionAt": null,
+            "settings": {
+              "position": 1,
+              "protected": false,
+              "starred": true
+            },
+            "createdByApplicationClientId": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "normalized": [
+              {
+                "available": "0.00",
+                "balance": "0.00",
+                "currency": "XXX"
+              }
+            ],
+            "wire": [
+              {
+                "accountName": "Xxxxxxxxxx",
+                "address": {
+                  "line1": "Xxxxx Xxxxxx",
+                  "line2": "XXXXXXXXXXXXXXXX"
+                },
+                "bic": "XXXXXXXX",
+                "currency": "XXX",
+                "iban": "XXXXXXXXXXXXXXXXXXXX",
+                "name": "xxxxxxxxxx"
               },
-              "bic": "XXXXXXXX",
-              "currency": "XXX",
-              "name": "Xxxxxxx",
-              "routingNumber": "xXXxxxxxx"
-            }
-          ]
-        }
+              {
+                "accountName": "XXXXXXXXXXX",
+                "accountNumber": "xxxxxxxxxxxx",
+                "address": {
+                  "line1": "xxxxxxxxxxxxxxxx",
+                  "line2": "xxxxxxxxxxxxxxxx"
+                },
+                "bic": "XXXXXXXX",
+                "currency": "XXX",
+                "name": "Xxxxxxx",
+                "routingNumber": "xXXxxxxxx"
+              }
+            ]
+          }
     MD
 
     def default_options
