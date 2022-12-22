@@ -148,6 +148,9 @@ module Agents
 
 
       payload = `curl -s --header "Authorization: Bearer #{bearer_token}" https://api.uphold.com/v0/me/cards`
+      if interpolated['debug'] == 'true'
+        log "payload is #{payload}"
+      end
       payload = JSON.parse(payload)
       if interpolated['changes_only'] == 'true'
         if payload.to_s != memory['last_status']
